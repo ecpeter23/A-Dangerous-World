@@ -20,9 +20,9 @@ Future Features:
 
 Idea:
 1. 1st Person
-2. Openworld low poly rpg
-3. Player does mission throughout the world (missions will be based off of the world and not preprogrammed)
-4. Bosses throughout the world (maybe to unlock new items or just to help get them(forced vs choice))
+3. Openworld (medieval style) low poly RPG
+4. Player does mission throughout the world (missions will be based off of the world and not preprogrammed)
+5. Bosses throughout the world (maybe to unlock new items or just to help get them(forced vs choice))
 
 Thanks:
 1. Libnoise as a noise library
