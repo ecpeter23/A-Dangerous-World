@@ -17,6 +17,15 @@ public class NoiseData : UpdatableData
     public int seed;
     public Vector2 offset;
 
+    public float libNoiseFrequency;
+    public float libNoiseDisplacement;
+
+    public bool libNoiseUseDistance;
+
+    public float fastNoiseJitter;
+    public float fastNoiseFrequency;
+
+
 #if UNITY_EDITOR
 
     protected override void OnValidate()

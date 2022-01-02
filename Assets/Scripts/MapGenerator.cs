@@ -6,7 +6,7 @@ using System.Threading;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, ColorMap, Mesh, Falloff};
+    public enum DrawMode { NoiseMap, ColorMap, Mesh, Falloff, Veroni, FastNoiseLite};
     public DrawMode drawMode;
 
     public TerrainData terrainData;
@@ -51,6 +51,9 @@ public class MapGenerator : MonoBehaviour
             if (instance.terrainData.useFlatShading)
             {
                 return 95;
+            } else if (instance.drawMode == DrawMode.Veroni)
+            {
+                return 500;
             }
             else
             {
@@ -76,6 +79,12 @@ public class MapGenerator : MonoBehaviour
         } else if (drawMode == DrawMode.Falloff)
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapChunkSize)));
+        } else if (drawMode == DrawMode.Veroni)
+        {
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(NoiseGenerator.GenerateVeroni(mapChunkSize, noiseData.libNoiseFrequency, noiseData.libNoiseDisplacement, noiseData.seed, noiseData.libNoiseUseDistance, noiseData.offset)));
+        } else if (drawMode == DrawMode.FastNoiseLite)
+        {
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(NoiseGenerator.GenerateFastNoiseLite(mapChunkSize, noiseData.fastNoiseJitter, noiseData.fastNoiseFrequency, noiseData.seed, noiseData.offset)));
         }
     }
 
@@ -141,6 +150,9 @@ public class MapGenerator : MonoBehaviour
 
     MapData GenerateMapData(Vector2 center)
     {
+        List<float[,]> noiseMaps = new List<float[,]>();
+
+
         float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize + 2, mapChunkSize + 2, noiseData.seed, noiseData.noiseScale, noiseData.octaves, noiseData.persistance, noiseData.lacunarity, center + noiseData.offset, noiseData.normalizeMode);
 
         Color[] colorMap = new Color[mapChunkSize * mapChunkSize];

@@ -87,6 +87,4 @@ public static class Noise
 
         return noiseMap;
     }
-
-    //public static float[,] GenerateBiomeMap(int mapSize, int seed, float scale)
 }
